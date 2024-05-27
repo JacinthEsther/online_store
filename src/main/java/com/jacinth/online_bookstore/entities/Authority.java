@@ -2,7 +2,6 @@ package com.jacinth.online_bookstore.entities;
 
 import jakarta.persistence.*;
 import lombok.Data;
-import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name = "authorities")
@@ -11,7 +10,6 @@ public class Authority {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
-    @GenericGenerator(name = "native")
     private long id;
 
     private String authority;
@@ -20,14 +18,11 @@ public class Authority {
     @JoinColumn(name = "user_id")
     private User user;
 
-
     public Authority(String authority, User user) {
         this.authority = authority;
         this.user = user;
-
     }
 
     public Authority() {
-
     }
 }

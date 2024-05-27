@@ -24,11 +24,13 @@ public class AuthorityServiceImpl implements AuthorityService {
 
     @Transactional
     public void addAuthority(Long userId, String role) {
-        User user = (User) userService.findById(userId).orElseThrow(
+        User user = userService.findById(userId).orElseThrow(
                 () -> new RuntimeException("user not found")
 
         );
         Authority authority = new Authority(role.toUpperCase(), user);
+        user.getAuthorities().add(authority);
+        userService.saveUserWithAuthority(user);
         authorityRepository.save(authority);
     }
 

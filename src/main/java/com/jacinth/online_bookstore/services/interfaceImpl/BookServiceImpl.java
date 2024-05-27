@@ -5,10 +5,10 @@ import com.jacinth.online_bookstore.entities.Book;
 import com.jacinth.online_bookstore.exceptions.ResourceNotFoundException;
 import com.jacinth.online_bookstore.repositories.BookRepository;
 import com.jacinth.online_bookstore.services.serviceInterfaces.BookService;
-
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,6 +19,7 @@ import java.util.stream.Collectors;
 public class BookServiceImpl implements BookService {
     @Autowired
     private BookRepository bookRepository;
+
 
     @Transactional(readOnly = true)
     @Cacheable("books")
@@ -66,7 +67,6 @@ public class BookServiceImpl implements BookService {
     }
 
 
-
     private BookDTO convertToDTO(Book book) {
         ModelMapper modelMapper = new ModelMapper();
         return modelMapper.map(book, BookDTO.class);
@@ -76,4 +76,5 @@ public class BookServiceImpl implements BookService {
         ModelMapper modelMapper = new ModelMapper();
         return modelMapper.map(bookDTO, Book.class);
     }
+
 }

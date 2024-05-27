@@ -3,12 +3,12 @@ package com.jacinth.online_bookstore.dtos;
 import jakarta.validation.constraints.Pattern;
 import lombok.Data;
 
-//import javax.validation.constraints.Pattern;
+import java.util.Set;
 
 @Data
-public class AuthorityDTO {
+public class AddAuthoritiesDTO {
     private Long userId;
 
     @Pattern(regexp = "^(?i)(user|admin|superUser)$", message = "Role should be 'user' or 'admin' or 'superUser")
-    private String role;
+    private Set<String> roles;
 }

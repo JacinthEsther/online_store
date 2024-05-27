@@ -1,11 +1,13 @@
 package com.jacinth.online_bookstore.dtos;
 
 
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 import lombok.Data;
 import org.springframework.validation.annotation.Validated;
 
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
+//import javax.validation.constraints.Pattern;
+//import javax.validation.constraints.Size;
 
 @Data
 @Validated

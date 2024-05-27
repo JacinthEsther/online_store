@@ -4,7 +4,6 @@ import com.jacinth.online_bookstore.dtos.RegisterUserDto;
 import com.jacinth.online_bookstore.entities.User;
 import org.springframework.security.core.Authentication;
 
-
 import java.util.List;
 import java.util.Optional;
 
@@ -19,4 +18,7 @@ public interface UserService {
     List<User> retrieveAllCustomers();
 
     Optional<User> findById(Long userId);
+
+
+    void saveUserWithAuthority(User user);
 }
