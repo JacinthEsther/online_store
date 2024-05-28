@@ -18,6 +18,8 @@ import java.util.function.Function;
 @Service
 public class JwtService {
 
+        @Value("${online_bookstore.app.SecretKey}")
+        private String SECRET_KEY;
 
     public String extractUsername(String token){
         return extractClaim(token, Claims::getSubject);
@@ -69,8 +71,6 @@ public class JwtService {
     }
 
     private Key getSignInKey(){
-
-        String SECRET_KEY = "{access_key}";
         byte[] keyBytes = Decoders.BASE64.decode(SECRET_KEY);
         return Keys.hmacShaKeyFor(keyBytes);
     }

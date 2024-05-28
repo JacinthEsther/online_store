@@ -1,8 +1,6 @@
 package com.jacinth.online_bookstore.controllers;
 
 import com.jacinth.online_bookstore.dtos.BookDTO;
-import com.jacinth.online_bookstore.exceptions.ErrorResponse;
-import com.jacinth.online_bookstore.exceptions.ResourceNotFoundException;
 import com.jacinth.online_bookstore.services.serviceInterfaces.BookService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/books")
 public class BookController {
 
     @Autowired
@@ -48,15 +46,15 @@ public class BookController {
 
     @PutMapping("/{email}/{book_id}")
     @PreAuthorize("@userServiceImpl.isUserAdmin(#email, authentication)")
-    public ResponseEntity<BookDTO> updateBook(@PathVariable Long id,@PathVariable String email, @Valid @RequestBody BookDTO bookDTO) {
-        BookDTO updatedBook = bookService.updateBook(id, bookDTO);
+    public ResponseEntity<BookDTO> updateBook(@PathVariable Long book_id,@PathVariable String email, @Valid @RequestBody BookDTO bookDTO) {
+        BookDTO updatedBook = bookService.updateBook(book_id, bookDTO);
         return ResponseEntity.ok(updatedBook);
     }
 
-    @DeleteMapping("/email/{book_id}")
+    @DeleteMapping("/{email}/{book_id}")
     @PreAuthorize("@userServiceImpl.isUserAdmin(#email, authentication)")
-    public ResponseEntity<Void> deleteBook(@PathVariable String email,@PathVariable Long id) {
-        bookService.deleteBook(id);
+    public ResponseEntity<Void> deleteBook(@PathVariable String email,@PathVariable Long book_id) {
+        bookService.deleteBook(book_id);
         return ResponseEntity.noContent().build();
     }
 
